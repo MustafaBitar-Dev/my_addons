@@ -56,6 +56,11 @@ final_wage = (wage + allowances) * (1 / day_hours) (hours per day in employee co
    - **Special**
 
 ### Search View
+1. Add custom search for `grade number` and `grade level`:
+   - If the user types a number, it will search for `grade number`.
+   - If the user types text, it will search for `grade level`.
+2. Filtering by `Ability to retire` field.
+3. Grouping by `grade level` field.
 
 ## Security
 1. Create `ir.model.access.csv`.
@@ -67,13 +72,3 @@ final_wage = (wage + allowances) * (1 / day_hours) (hours per day in employee co
 2. Inherit `mail.thread` and `mail.activity.mixin` in `hr_grade` model.
 3. Define chatter box fields inside the form view.
 4. Set `tracking=True` on all fields in `hr_grade` model.
-
-### Notes
-   - manually grades
-   - and hr.contract: state == [ running, draft ]
-   - Tree view in the documentation
-   - other models type
-   - readonly property 
-   - active reserved field
-   - state property 
-   - <separator/> search view
