@@ -86,12 +86,12 @@
         <field name="disability_rate" optional="1" />
         <field name="day_hours" optional="1" />
 
-        <!-- Allowance fields -->
-        <field name="housing_allowance" />
-        <field name="education_allowance" />
-        <field name="transport_allowance" />
-        <field name="medical_allowance" />
-        <field name="children_allowance" />
+        <!-- Allowance fields with constraints -->
+        <field name="housing_allowance" required="1" />
+        <field name="education_allowance" required="1" />
+        <field name="transport_allowance" required="1" />
+        <field name="medical_allowance" required="1" />
+        <field name="children_allowance" required="1" />
 
         <!-- Special fileds -->
         <field name="is_retirement_eligible" optional="1"/>

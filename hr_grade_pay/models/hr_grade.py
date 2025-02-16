@@ -37,6 +37,11 @@ class HrGrade(models.Model):
         ('executive', 'Executive')], 
         tracking=True)
     
+    # Database level constrains
+    _sql_constraints = [
+        ('unique_grade', 'unique("grade_number")', 'Grade Number Should Be Unique')
+    ]    
+
     # Logic level constrains
     @api.constrains('grade_number')
     def _check_positive(self):
