@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<odoo>
+
+  <record id="hr_grade_search" model="ir.ui.view">
+    <field name="name">HR Grade Search</field>
+    <field name="model">hr.grade</field>
+    <field name="arch" type="xml">
+      <search string="HR Grade Pay Search">
+        <!-- If the user type a number, it will search for a grade
+        And if the user type a string then it willsearch for a grade level -->
+        <field name="grade_number" />
+        <field name="grade_level" />
+        <!-- Filtering by Ability to retire -->
+        <filter string="Able to retire" name="retirement_true" domain="[('is_retirement_eligible', '=', True)]"/>
+        <filter string="Unable to retire" name="retirement_false" domain="[('is_retirement_eligible', '=', False)]"/>
+        <!-- Groubing by grade level -->
+        <filter name="grade_level" string="Grade Level" context="{'group_by': 'grade_level'}"/>
+      </search>
+    </field>
+  </record>
+
+  <record id="hr_grade_view_form" model="ir.ui.view">
+    <field name="name">HR Grade Form</field>
+    <field name="model">hr.grade</field>
+    <field name="arch" type="xml">
+      <!-- I put each kind of fields in different page -->
+      <form string="HR Grade Pay Form">
+        <sheet>
+          <!-- Main field & Day hours -->
+          <div class="oe_title">
+            <label for="grade_number" />
+            <h1>
+              <field name="grade_number"/>
+            </h1>
+          </div>
+          <group>
+            <field name="day_hours"/>
+          </group>
+          <notebook>
+            <!-- Allowance fields -->
+            <page string="Allowances">
+              <group>             
+                <field name="housing_allowance" string="Housing Allowance" />
+                <field name="education_allowance" string="Education Allowance" />
+                <field name="transport_allowance" string="Transport Allowance" />
+                <field name="medical_allowance" string="Medical Allowance" />
+                <field name="children_allowance" string="Children Allowance" />
+              </group>
+            </page>
+            <!-- Rate fields -->
+            <page string="Rates">
+              <group>
+                <field name="disability_rate"/>
+                <field name="female_rate"/>
+              </group>              
+            </page>
+            <!-- Special fileds -->
+            <page string="Specials">
+              <group>
+                <field name="is_retirement_eligible" />
+                <field name="grade_level" />
+              </group>             
+            </page>
+          </notebook>
+        </sheet>
+        <div class="oe_chatter">
+          <field name="message_follower_ids" widget="mail_followers" />
+          <field name="activity_ids" />
+          <field name="message_ids" />
+        </div>
+      </form>
+    </field>
+  </record>
+
+  <record id="hr_grade_view_tree" model="ir.ui.view">
+    <field name="name">HR Grade Tree</field>
+    <field name="model">hr.grade</field>
+    <field name="arch" type="xml">
+      <tree string="HR Grade Pay Tree">
+        <!-- Main field -->
+        <field name="grade_number" />
+
+        <!-- Rate fields & Day hours -->
+        <field name="female_rate" optional="1" />
+        <field name="disability_rate" optional="1" />
+        <field name="day_hours" optional="1" />
+
+        <!-- Allowance fields -->
+        <field name="housing_allowance" />
+        <field name="education_allowance" />
+        <field name="transport_allowance" />
+        <field name="medical_allowance" />
+        <field name="children_allowance" />
+
+        <!-- Special fileds -->
+        <field name="is_retirement_eligible" optional="1"/>
+        <field name="grade_level" optional="1" />
+      </tree>
+    </field>
+</record>
+
+</odoo>

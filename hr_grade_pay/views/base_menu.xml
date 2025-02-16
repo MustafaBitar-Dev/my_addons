@@ -1,0 +1,21 @@
+<odoo>
+
+  <record id="grade_pay_action" model="ir.actions.act_window">
+    <field name="name">HR Grade Pay</field>
+    <field name="res_model">hr.grade</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <!-- I used this overlapping way in writing the menu 
+      (I found it in the documentation) 
+      because I think it is easier to read and understand. -->
+  <menuitem id="grade_pay_root_menu" name="Grade Pay">
+    <menuitem id="grade_pay_menu" name="Grades">
+      <menuitem 
+        id="grade_pay_menu_item" 
+        name="Grades Table" 
+        action="grade_pay_action" />
+    </menuitem>
+  </menuitem>
+
+</odoo>
