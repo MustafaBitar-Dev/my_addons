@@ -39,16 +39,30 @@ class HrGrade(models.Model):
     
     # Database level constrains
     _sql_constraints = [
-        ('unique_grade', 'unique("grade_number")', 'Grade Number Should Be Unique')
-    ]    
-
+        ('unique_grade_number', 'unique("grade_number")', 'Grade Number Should Be Unique')
+    ]   
+  
     # Logic level constrains
     @api.constrains('grade_number')
-    def _check_positive(self):
+    def _check_greater_than_zero(self):
         for rec in self:
-            if rec.grade_number < 1:               
+            if rec.grade_number <= 0:               
                 raise ValidationError('Grade Number Should Be A Positive Integer')
-       
+            
+    @api.constrains(
+        'disability_rate', 'female_rate', 'day_hours', 'housing_allowance',
+        'education_allowance', 'transport_allowance', 'medical_allowance',
+        'children_allowance' )
+    def _check_positive(self):
+        field_names = [
+            'disability_rate', 'female_rate', 'day_hours', 'housing_allowance',
+            'education_allowance', 'transport_allowance', 'medical_allowance',
+            'children_allowance'
+        ]
+        for rec in self:
+            for field_name in field_names:
+                if rec[field_name] < 0:
+                    raise ValidationError( field_name.replace('_', ' ').title() + " Can't Be A Nigative Number")
        
     # CRUD Methods 
     @api.model_create_multi # or @api.model      
@@ -66,7 +80,7 @@ class HrGrade(models.Model):
        res = super(HrGrade, self).write(vals)
        return res
    
-    def unlink(self, vals):
-        res = super(HrGrade, self).unlink(vals)
+    def unlink(self):
+        res = super(HrGrade, self).unlink()
         return res
    
