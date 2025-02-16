@@ -13,7 +13,7 @@
         <!-- Filtering by Ability to retire -->
         <filter string="Able to retire" name="retirement_true" domain="[('is_retirement_eligible', '=', True)]"/>
         <filter string="Unable to retire" name="retirement_false" domain="[('is_retirement_eligible', '=', False)]"/>
-        <!-- Groubing by grade level -->
+        <!-- Grouping by grade level -->
         <filter name="grade_level" string="Grade Level" context="{'group_by': 'grade_level'}"/>
       </search>
     </field>
@@ -63,6 +63,7 @@
             </page>
           </notebook>
         </sheet>
+        <!-- Add Chatter Box -->
         <div class="oe_chatter">
           <field name="message_follower_ids" widget="mail_followers" />
           <field name="activity_ids" />
