@@ -73,12 +73,44 @@ final_wage = (wage + allowances) * (1 / day_hours) (hours per day in employee co
 3. Define chatter box fields inside the form view.
 4. Set `tracking=True` on all fields in `hr_grade` model.
 
-### Notes
-   - manually grades
-   - and hr.contract: state == [ running, draft ]
-   - Tree view in the documentation
-   - other models type
-   - readonly property 
-   - active reserved field
-   - state property 
-   - <separator/> search view
+## Constraints
+
+1. **Grade number should be an integer bigger than 0**  
+   *(Python)*
+2. **Grade number should be unique**  
+   *(SQL)*
+3. **All fields should be a positive number**  
+   *(Python)*
+4. **Day hours must be between 0 - 12**  
+   *(Python)*
+5. **All allowances should be required**  
+   *(Presentation)*
+
+## CRUD Methods
+
+1. **Create method** (`@api.model` or `@api.model_create_multi`)
+   - Attributes: `vals`
+2. **Search method** (`@api.model`)
+   - Attributes: `domain`, `offset`, `limit`, `order`, `access_rights_uid`
+3. **Write method**
+   - Attributes: `vals`
+4. **Unlink method**
+   - Attributes: `vals`
+
+## Notes
+
+- Manually grades
+- `hr.contract`: `state == [running, draft]`
+- Tree view in the documentation
+- Other models type
+- Readonly property
+- Active reserved field
+- State property
+- `<separator/>` in search view
+- `size` attribute
+- `create = "1"`
+- `edit = "1"`
+- `delete = "1"`
+- `multi_edit = "1"`
+
+
