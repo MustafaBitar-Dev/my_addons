@@ -48,3 +48,25 @@ class HrGrade(models.Model):
         for rec in self:
             if rec.grade_number < 1:               
                 raise ValidationError('Grade Number Should Be A Positive Integer')
+       
+       
+    # CRUD Methods 
+    @api.model_create_multi # or @api.model      
+    def create(self, vals):
+        res = super(HrGrade, self).create(vals)
+        # Another way: res = super().create(self, vals)
+        return res
+    
+    @api.model
+    def _search(self, domain, offset=0, limit=None, order=None, access_rights_uid=None):
+        res = super(HrGrade, self)._search(domain, offset=0, limit=None, order=None, access_rights_uid=None)
+        return res
+
+    def write(self, vals):
+       res = super(HrGrade, self).write(vals)
+       return res
+   
+    def unlink(self, vals):
+        res = super(HrGrade, self).unlink(vals)
+        return res
+   
