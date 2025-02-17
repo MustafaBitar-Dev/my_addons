@@ -5,7 +5,7 @@ class TaxType(models.Model):
     _description = 'Tax Type'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     
-    # Main fields
+    # Main field
     name = fields.Char(required=True, tracking=True, size=20)
     
     # Database level constrains
