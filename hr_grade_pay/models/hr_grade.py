@@ -5,6 +5,7 @@ class HrGrade(models.Model):
     _name = 'hr.grade'
     _description = 'Geade'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _rec_name = 'grade_number'
     
     # Main field
     grade_number = fields.Integer('Grade', required=True, copy=False, tracking=True)
@@ -36,6 +37,17 @@ class HrGrade(models.Model):
         ('lead', 'Lead/Expert'),
         ('executive', 'Executive')], 
         tracking=True)
+    
+    # Relationship with hr_scale_pay model
+    pay_scale_id = fields.Many2one('hr.pay.scale')
+    
+    # Relationship with tax_type model
+    tax_type_ids = fields.Many2many('tax.type')
+    
+    # 
+    pay_scale_max_salary = fields.Float(related='pay_scale_id.max_salary' , required=True, tracking=True, digits=(0, 2))
+    pay_scale_min_salary = fields.Float(related='pay_scale_id.min_salary', required=True, tracking=True, digits=(0, 2))
+    
     
     # Database level constrains
     _sql_constraints = [
@@ -83,4 +95,4 @@ class HrGrade(models.Model):
     def unlink(self):
         res = super(HrGrade, self).unlink()
         return res
-   
+

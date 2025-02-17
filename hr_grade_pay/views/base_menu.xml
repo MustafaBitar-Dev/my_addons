@@ -1,20 +1,53 @@
 <odoo>
 
-  <record id="grade_pay_action" model="ir.actions.act_window">
+  <record id="grade_action" model="ir.actions.act_window">
     <field name="name">HR Grade Pay</field>
     <field name="res_model">hr.grade</field>
     <field name="view_mode">list,form</field>
   </record>
 
+  <record id="pay_scale_action" model="ir.actions.act_window">
+    <field name="name">HR Pay Scale</field>
+    <field name="res_model">hr.pay.scale</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="tax_type_action" model="ir.actions.act_window">
+    <field name="name">Tax Type</field>
+    <field name="res_model">tax.type</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+
   <!-- I used this overlapping way in writing the menu 
       (I found it in the documentation) 
       because I think it is easier to read and understand. -->
-  <menuitem id="grade_pay_root_menu" name="Grade Pay">
-    <menuitem id="grade_pay_menu" name="Grades">
+
+  <menuitem 
+    id="grade_pay_root_menu" 
+    name="Grade Pay"
+    web_icon="hr_grade_pay,static/description/icon.png"
+
+  >
+    <menuitem id="grade_menu" name="Grade">
       <menuitem 
-        id="grade_pay_menu_item" 
+        id="grade_menu_item" 
         name="Grades Table" 
-        action="grade_pay_action" />
+        action="grade_action" />
+    </menuitem>
+
+    <menuitem id="pay_scale_menu" name="Salary">
+      <menuitem 
+        id="pay_scale_menu_item" 
+        name="Pay Scales Table" 
+        action="pay_scale_action" />
+    </menuitem>
+
+    <menuitem id="tax_type_menu" name="Tax">
+      <menuitem 
+        id="tax_type_menu_item" 
+        name="Tax Type Table" 
+        action="tax_type_action" />
     </menuitem>
   </menuitem>
 
