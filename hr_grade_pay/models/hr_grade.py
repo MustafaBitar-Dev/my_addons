@@ -5,6 +5,7 @@ class HrGrade(models.Model):
     _name = 'hr.grade'
     _description = 'Geade'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _rec_name = 'grade_number'
     
     # Main field
     grade_number = fields.Integer('Grade', required=True, copy=False, tracking=True)
@@ -37,7 +38,11 @@ class HrGrade(models.Model):
         ('executive', 'Executive')], 
         tracking=True)
     
+    # Relationship with hr_scale_pay model
     pay_scale_id = fields.Many2one('hr.pay.scale')
+    
+    # Relationship with tax_type model
+    tax_type_ids = fields.Many2many('tax.type')
     
     # Database level constrains
     _sql_constraints = [

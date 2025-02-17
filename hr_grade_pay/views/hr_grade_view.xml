@@ -26,7 +26,7 @@
       <!-- I put each kind of fields in different page -->
       <form string="HR Grade Pay Form">
         <sheet>
-          <!-- Main field & Day hours & Pay scale -->          
+          <!-- Main field & Day hours & Pay scale & Tax types -->          
           <div class="oe_title">
             <label for="grade_number" />
             <h1>
@@ -40,7 +40,10 @@
             <group>
               <field name="pay_scale_id" />
             </group>
-            <!-- I should add max and min salary here -->
+            <group>
+              <field name="tax_type_ids" string="Taxes" widget="many2many_tags"/>
+            </group> 
+            <!-- I should add max and min salary here later -->
           </group>
           <notebook>
             <!-- Allowance fields -->

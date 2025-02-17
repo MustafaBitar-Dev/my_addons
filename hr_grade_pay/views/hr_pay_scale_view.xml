@@ -22,6 +22,9 @@
             <group>
               <field name="max_salary"/>
             </group>
+            <group>
+              <field name="grade_ids" string="Grades" widget="many2many_tags"/>
+            </group>          
           </group>
         </sheet>
         <!-- Chatter Box -->
@@ -39,7 +42,7 @@
     <field name="model">hr.pay.scale</field>
     <field name="arch" type="xml">
       <tree string="HR Pay Scale Tree">
-        <!-- Main field -->
+        <!-- Main fields -->
         <field name="name"/>
         <field name="min_salary"/>
         <field name="max_salary"/>

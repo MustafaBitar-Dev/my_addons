@@ -12,6 +12,13 @@
     <field name="view_mode">list,form</field>
   </record>
 
+  <record id="tax_type_action" model="ir.actions.act_window">
+    <field name="name">Tax Type</field>
+    <field name="res_model">tax.type</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+
   <!-- I used this overlapping way in writing the menu 
       (I found it in the documentation) 
       because I think it is easier to read and understand. -->
@@ -29,6 +36,13 @@
         id="pay_scale_menu_item" 
         name="Pay Scales Table" 
         action="pay_scale_action" />
+    </menuitem>
+
+    <menuitem id="tax_type_menu" name="Tax">
+      <menuitem 
+        id="tax_type_menu_item" 
+        name="Tax Type Table" 
+        action="tax_type_action" />
     </menuitem>
   </menuitem>
 
