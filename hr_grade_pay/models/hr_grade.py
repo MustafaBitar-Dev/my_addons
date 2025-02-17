@@ -44,6 +44,11 @@ class HrGrade(models.Model):
     # Relationship with tax_type model
     tax_type_ids = fields.Many2many('tax.type')
     
+    # 
+    pay_scale_max_salary = fields.Float(related='pay_scale_id.max_salary' , required=True, tracking=True, digits=(0, 2))
+    pay_scale_min_salary = fields.Float(related='pay_scale_id.min_salary', required=True, tracking=True, digits=(0, 2))
+    
+    
     # Database level constrains
     _sql_constraints = [
         ('unique_grade_number', 'unique("grade_number")', 'Grade Number Should Be Unique')

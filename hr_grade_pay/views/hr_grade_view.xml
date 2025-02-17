@@ -41,9 +41,14 @@
               <field name="pay_scale_id" />
             </group>
             <group>
+              <field name="pay_scale_min_salary" string="Min Salary" />
+            </group> 
+            <group>
+              <field name="pay_scale_max_salary" string="Max Salary" />
+            </group> 
+            <group>
               <field name="tax_type_ids" string="Taxes" widget="many2many_tags"/>
             </group> 
-            <!-- I should add max and min salary here later -->
           </group>
           <notebook>
             <!-- Allowance fields -->
