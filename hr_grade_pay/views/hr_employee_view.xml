@@ -1,11 +1,18 @@
 <?xml version="1.0"?>
 <odoo>
 
-  <record id="hr_employee_view_form" model="ir.ui.view">
+  <record id="hr_employee_view_form_inherit" model="ir.ui.view">
     <field name="name">HR Employee View Form</field>
     <field name="model">hr.employee</field>
     <field name="inherit_id" ref="hr.view_employee_form" />
     <field name="arch" type="xml">
+      <xpath expr="//sheet/notebook" position="inside"> 
+          <page string="Salary Information">
+            <group>
+              <field name="wage"/>                         
+            </group>
+          </page>
+        </xpath>
       <field name="work_email" position="after">
         <field name="grade_id" />
       </field>      
