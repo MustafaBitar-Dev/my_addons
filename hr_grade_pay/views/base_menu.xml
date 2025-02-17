@@ -23,7 +23,12 @@
       (I found it in the documentation) 
       because I think it is easier to read and understand. -->
 
-  <menuitem id="grade_pay_root_menu" name="Grade Pay">
+  <menuitem 
+    id="grade_pay_root_menu" 
+    name="Grade Pay"
+    web_icon="hr_grade_pay,static/description/icon.png"
+
+  >
     <menuitem id="grade_menu" name="Grade">
       <menuitem 
         id="grade_menu_item" 
