@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<odoo>
+
+  <record id="hr_pay_scale_view_form" model="ir.ui.view">
+    <field name="name">HR Pay Scale Form</field>
+    <field name="model">hr.pay.scale</field>
+    <field name="arch" type="xml">
+      <form string="HR Pay Scale Form">
+        <sheet>
+          <!-- Main field -->
+          <div class="oe_title">
+            <label for="name" />
+            <h1>
+              <field name="name"/>
+            </h1>
+          </div> 
+          <!-- Max and min salary fields -->
+          <group>
+            <group>
+              <field name="min_salary"/>
+            </group>
+            <group>
+              <field name="max_salary"/>
+            </group>
+          </group>
+        </sheet>
+        <!-- Chatter Box -->
+        <div class="oe_chatter">
+          <field name="message_follower_ids" widget="mail_followers" />
+          <field name="activity_ids" />
+          <field name="message_ids" />
+        </div>
+      </form>
+    </field>
+  </record>
+
+  <record id="hr_pay_scale_view_tree" model="ir.ui.view">
+    <field name="name">HR Pay Scale Tree</field>
+    <field name="model">hr.pay.scale</field>
+    <field name="arch" type="xml">
+      <tree string="HR Pay Scale Tree">
+        <!-- Main field -->
+        <field name="name"/>
+        <field name="min_salary"/>
+        <field name="max_salary"/>
+      </tree>
+    </field>
+  </record>
+
+</odoo>

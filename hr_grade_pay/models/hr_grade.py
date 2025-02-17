@@ -37,6 +37,8 @@ class HrGrade(models.Model):
         ('executive', 'Executive')], 
         tracking=True)
     
+    pay_scale_id = fields.Many2one('hr.pay.scale')
+    
     # Database level constrains
     _sql_constraints = [
         ('unique_grade_number', 'unique("grade_number")', 'Grade Number Should Be Unique')
@@ -83,4 +85,4 @@ class HrGrade(models.Model):
     def unlink(self):
         res = super(HrGrade, self).unlink()
         return res
-   
+

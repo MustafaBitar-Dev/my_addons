@@ -8,6 +8,7 @@
   'data': [
     'security/ir.model.access.csv',
     'views/base_menu.xml',
-    'views/hr_grade_view.xml'
+    'views/hr_grade_view.xml',
+    'views/hr_pay_scale_view.xml'
   ]
 }
