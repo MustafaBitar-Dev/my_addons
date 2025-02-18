@@ -67,7 +67,6 @@
         </xpath>
       <field name="work_email" position="after">
         <field name="grade_id" />
-        <field name="contract_type_id"/>    
       </field>      
     </field>
   </record>
@@ -82,4 +81,16 @@
       action = records.action_valid()
     </field>
   </record>
+
+  <record id="visa_expiration_cron" model="ir.cron">
+    <field name="name">Check Visa Expiration</field>
+    <field name="model_id" ref="model_hr_employee"/>
+    <field name="state">code</field>
+    <field name="code">model.check_visa_expiration()</field>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+    <field name="numbercall">-1</field>
+    <field name="active">True</field>
+  </record>
+
 </odoo>

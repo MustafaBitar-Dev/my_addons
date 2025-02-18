@@ -1,4 +1,6 @@
 from odoo import models, fields, api
+from datetime import timedelta
+
 
 class HREmployee(models.Model):
     _inherit = 'hr.employee'
@@ -102,3 +104,14 @@ class HREmployee(models.Model):
                 {'visa_status': 'valid'}
             )
 
+    def check_visa_expiration(self):
+        employee_ids = self.search([])  
+        for rec in employee_ids:           
+            if rec.visa_expire:
+                if rec.visa_expire < fields.date.today():
+                    rec.visa_status = 'expired'              
+                elif rec.visa_expire - timedelta(30) < fields.date.today():
+                    rec.visa_status = 'soon'
+                else:
+                    rec.visa_status = 'valid'    
+        
