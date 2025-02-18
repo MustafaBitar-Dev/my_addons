@@ -13,6 +13,7 @@
     'views/hr_pay_scale_view.xml',
     'views/tax_type_view.xml',
     'views/hr_employee_view.xml',
+    'wizard/change_visa_status_view.xml'
     # 'reports/hr_grade_report.xml'
   ],
   'assets': {

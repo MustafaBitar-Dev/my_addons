@@ -29,7 +29,10 @@
     <field name="arch" type="xml">
       <xpath expr="//header" position="inside">
         <field name="visa_status" widget="statusbar" />
-        <button type="object" name="action_expired" string="Expired Visa"/>        
+        <button type="object" name="action_expired" string="Expired Visa" invisible="visa_status in ['expired', 'canceled']" />        
+        <button type="object" name="action_soon" string="Expired Soon Visa" invisible="visa_status in ['soon', 'canceled']" />        
+        <button type="object" name="action_valid" string="Valid Visa" invisible="visa_status in ['valid', 'canceled']" />        
+        <button type="object" name="action_canceled" string="Valid Canceled" invisible="visa_status == 'canceled'" />        
       </xpath>  
       <xpath expr="//group[@name='emergency']" position="inside">
         <field name="has_disability"/>
@@ -44,47 +47,58 @@
           <page string="Salary Information">
             <group>
               <group string="Results">
-                <field name="visa_status"/>        
+                <!-- <field name="visa_status"/>         -->
                 <field name="salary" string="Total"/>
                 <field name="wage"/> 
                 <field name="allowances_sum"/> 
               </group>
               <group string="Allowances">
-                <field name="housing_allowance"/>                         
-                <field name="education_allowance"/>
-                <field name="transport_allowance"/>     
-                <field name="medical_allowance"/>                         
-                <field name="children_allowance"/>                         
+                <field name="housing_allowance" />                         
+                <field name="education_allowance" />
+                <field name="transport_allowance" />     
+                <field name="medical_allowance" />                         
+                <field name="children_allowance" />                         
               </group>              
               <group string="Rates">                
-                <field name="day_hours"/> 
-                <field name="female_rate"/> 
-                <field name="disability_rate"/>                          
+                <field name="day_hours" /> 
+                <field name="female_rate" /> 
+                <field name="disability_rate" />                          
               </group>
               <group string="Others">
-                <field name="is_retirement_eligible"/> 
-                <field name="grade_level"/> 
-                <field name="pay_scale_id"/> 
-                <field name="pay_scale_min_salary"/>  
-                <field name="pay_scale_max_salary"/>                                        
+                <field name="is_retirement_eligible" /> 
+                <field name="grade_level" /> 
+                <field name="pay_scale_id" /> 
+                <field name="pay_scale_min_salary" />  
+                <field name="pay_scale_max_salary" />                                        
               </group>
             </group>
           </page>
         </xpath>
       <field name="work_email" position="after">
-        <field name="grade_id" />
+        <field name="grade_id" readonly="visa_status == 'canceld'" />
       </field>    
     </field>
   </record>
 
 
-  <record id="valid_visa_server_action" model="ir.actions.server">
-    <field name="name">Valid Visa</field>
+  <record id="employee_type_server_action" model="ir.actions.server">
+    <field name="name">Set To Employee</field>
     <field name="model_id" ref="model_hr_employee"/>
     <field name="binding_model_id" ref="model_hr_employee"/>
     <field name="state">code</field>
     <field name="code">
-      action = records.action_valid()
+      action = records.action_employee_type()
+    </field>
+  </record>
+
+
+  <record id="change_visa_status_server_action" model="ir.actions.server">
+    <field name="name">Change Visa Status</field>
+    <field name="model_id" ref="model_hr_employee"/>
+    <field name="binding_model_id" ref="model_hr_employee"/>
+    <field name="state">code</field>
+    <field name="code">
+      action = records.action_change_visa_status_wizard()
     </field>
   </record>
 

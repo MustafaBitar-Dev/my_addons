@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access.hr_grade,access.hr_grade,model_hr_grade,,1,1,1,1
 access.hr_pay_scale,access.hr_pay_scale,model_hr_pay_scale,,1,1,1,1
 access.tax_type,access.tax_type,model_tax_type,,1,1,1,1
+access.change_visa_status,access.change_visa_status,model_change_visa_status,,1,1,1,1

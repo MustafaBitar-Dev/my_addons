@@ -15,6 +15,7 @@ class HREmployee(models.Model):
         ('valid', 'Valid'),
         ('soon', 'Expired Soon'),
         ('expired', 'Expired'),
+        ('canceled', 'Canceled')
     ], default="valid", tracking=True)
     
     # From chat gpt
@@ -94,18 +95,32 @@ class HREmployee(models.Model):
                 rec.salary = rec.wage + allowances
             else:
                 rec.salary = 0
+                rec.allowances_sum = 0
                 
     def action_expired(self):
         for rec in self:
             rec.write(
                 {'visa_status': 'expired'}
             )
-            
+    def action_soon(self):
+        for rec in self:
+            rec.write(
+                {'visa_status': 'soon'}
+            )
     def action_valid(self):
         for rec in self:
             rec.write(
                 {'visa_status': 'valid'}
             )
+    def action_canceled(self):
+        for rec in self:
+            rec.write(
+                {'visa_status': 'canceled'}
+            )
+            
+    def action_employee_type(self):
+        for rec in self:
+            rec.employee_type = 'employee'
 
     def check_visa_expiration(self):
         employee_ids = self.search([])  
@@ -126,3 +141,8 @@ class HREmployee(models.Model):
            res.ref = self.env['ir.sequence'].next_by_code('empolyee_seq')
         return res    
         
+    # For visa status wizard
+    def action_change_visa_status_wizard(self):
+        action = self.env['ir.actions.actions']._for_xml_id('hr_grade_pay.change_visa_status_wizard_action')
+        action['context'] = {'default_employee_id': self.id}
+        return action

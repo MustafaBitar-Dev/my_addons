@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<odoo>
+
+  <record id="change_visa_status_view_form" model="ir.ui.view">
+    <field name="name">Change Visa Status View Form</field>
+    <field name="model">change.visa.status</field>
+    <field name="arch" type="xml">
+      <form string="Change Visa Status Form">
+          <group>
+            <field name="visa_status"/>
+            <field name="reason"/>
+          </group>
+          <footer>
+            <button name="action_confirm" string="Confirm" type="object" class="btn-secondary"/>  
+            <button string="Cancel" special="cancel" class="btn-secondary"/>
+          </footer>
+      </form>
+    </field>
+  </record>
+
+
+  <record id="change_visa_status_wizard_action" model="ir.actions.act_window">
+    <field name="name">Change Visa Status</field>
+    <field name="res_model">change.visa.status</field>
+    <field name="target">new</field>
+    <field name="view_mode">form</field>
+  </record>
+
+</odoo>

@@ -49,6 +49,7 @@
         name="Tax Type Table" 
         action="tax_type_action" />
     </menuitem>
+    
   </menuitem>
 
 </odoo>
