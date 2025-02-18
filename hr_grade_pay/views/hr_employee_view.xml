@@ -1,11 +1,35 @@
 <?xml version="1.0"?>
 <odoo>
 
+
+  <!-- BLOCKER -->
+  <!-- <record id="hr_employee_view_kanban_inherit" model="ir.ui.view">
+    <field name="name">HR Employee View Kanban</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.hr_kanban_view_employees" />
+    <field name="arch" type="xml">
+       
+      <xpath expr="//div[@class='oe_kanban_bottom_left']" position="inside">
+        <span class="status-circle"
+           t-att-style="'background-color: red;' if visa_status == 'expired'"
+           t-att-style="'background-color: yellow;' if visa_status == 'soon'"
+           t-att-style="'background-color: green;' if visa_status == 'valid'"
+        >
+        </span>
+      </xpath>   
+       
+    </field>
+  </record> -->
+
+
   <record id="hr_employee_view_form_inherit" model="ir.ui.view">
     <field name="name">HR Employee View Form</field>
     <field name="model">hr.employee</field>
     <field name="inherit_id" ref="hr.view_employee_form" />
     <field name="arch" type="xml">
+      <xpath expr="//header" position="inside">
+        <field name="visa_status" widget="statusbar" />        
+      </xpath>  
       <xpath expr="//group[@name='emergency']" position="inside">
         <field name="has_disability"/>
       </xpath>   
@@ -13,6 +37,7 @@
           <page string="Salary Information">
             <group>
               <group string="Results">
+                <field name="visa_status"/>        
                 <field name="salary" string="Total"/>
                 <field name="wage"/> 
                 <field name="allowances_sum"/> 
@@ -43,17 +68,6 @@
         <field name="grade_id" />
         <field name="contract_type_id"/>    
       </field>      
-    </field>
-  </record>
-
-  <record id="tax_type_view_tree" model="ir.ui.view">
-    <field name="name">Tax Type Tree</field>
-    <field name="model">tax.type</field>
-    <field name="arch" type="xml">
-      <tree string="Tax Type Tree">
-        <!-- Main fields -->
-        <field name="name"/>
-      </tree>
     </field>
   </record>
 

@@ -6,6 +6,12 @@ class HREmployee(models.Model):
     # Relationship with hr_grade model
     grade_id = fields.Many2one('hr.grade')
     
+    visa_status = fields.Selection([
+        ('valid', 'Valid'),
+        ('soon', 'Expired Soon'),
+        ('expired', 'Expired'),
+    ], default="valid", tracking=True)
+    
     # From chat gpt
     _inherits = {'hr.grade': 'grade_id'}
 
@@ -33,8 +39,11 @@ class HREmployee(models.Model):
         'km_home_work', 'housing_allowance', 'day_hours')
     def _compute_salary (self):
         for rec in self:
-            allowances =  rec.housing_allowance
+            
             if rec.employee_type == 'employee' and rec.contract_code not in ['Seasonal', 'Interim']:
+                # Aplly housing allowance
+                allowances =  rec.housing_allowance 
+ 
                 # education_allowance will applied if the certificate not too high 
                 # Also it will be increased for female employee
                 if rec.certificate in ['master', 'doctor']:
@@ -43,6 +52,7 @@ class HREmployee(models.Model):
                     allowances += rec.education_allowance * rec.female_rate
                 else:
                     allowances += rec.education_allowance
+                    
                 # medical_allowance will be increased if the employee has disability
                 if rec.has_disability:                  
                     allowances += rec.medical_allowance * rec.disability_rate
@@ -54,15 +64,15 @@ class HREmployee(models.Model):
                 if rec.work_location_name != 'Home':
                     allowances += rec.transport_allowance * rec.km_home_work
                     
-                # Apply children allowance based on their count, also aplly housing allowance
+                # Apply children allowance based on their count
                 allowances += rec.children_allowance * rec.children
                 
                 # If the employee work hours in his contract less than the grade required 
                 # hours, then this will decrease the allowances.
-                if rec.hours_per_day > rec.day_hours: 
-                    hour_rate = 1
+                if rec.day_hours and rec.hours_per_day and rec.hours_per_day < rec.day_hours: 
+                    hour_rate = rec.hours_per_day / rec.day_hours                           
                 else:
-                    hour_rate = rec.hours_per_day / rec.day_hours               
+                    hour_rate = 1           
                 allowances *= hour_rate                   
 
                 # Check pay scale
@@ -71,6 +81,7 @@ class HREmployee(models.Model):
                 if allowances < rec.pay_scale_min_salary:
                     allowances = rec.pay_scale_min_salary
                 
+                
                 # Total allowances
                 rec.allowances_sum = allowances
                 
@@ -78,3 +89,5 @@ class HREmployee(models.Model):
                 rec.salary = rec.wage + allowances
             else:
                 rec.salary = 0
+                
+    

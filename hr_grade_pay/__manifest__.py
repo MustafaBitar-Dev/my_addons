@@ -10,7 +10,10 @@
     'views/base_menu.xml',
     'views/hr_grade_view.xml',
     'views/hr_pay_scale_view.xml',
-    'views/tax_view.xml',
-    'views/hr_employee_view.xml'
-  ]
+    'views/tax_type_view.xml',
+    'views/hr_employee_view.xml',
+  ],
+  'assets': {
+    'web.assets_backend': ['hr_grade_pay/static/src/css/hr_employee.css']
+  } 
 }
