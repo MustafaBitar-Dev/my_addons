@@ -1,18 +1,50 @@
 <?xml version="1.0"?>
 <odoo>
 
+
+  <!-- BLOCKER -->
+  <!-- <record id="hr_employee_view_kanban_inherit" model="ir.ui.view">
+    <field name="name">HR Employee View Kanban</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.hr_kanban_view_employees" />
+    <field name="arch" type="xml">
+       
+      <xpath expr="//div[@class='oe_kanban_bottom_left']" position="inside">
+        <span class="status-circle"
+           t-att-style="'background-color: red;' if visa_status == 'expired'"
+           t-att-style="'background-color: yellow;' if visa_status == 'soon'"
+           t-att-style="'background-color: green;' if visa_status == 'valid'"
+        >
+        </span>
+      </xpath>   
+       
+    </field>
+  </record> -->
+
+
   <record id="hr_employee_view_form_inherit" model="ir.ui.view">
     <field name="name">HR Employee View Form</field>
     <field name="model">hr.employee</field>
     <field name="inherit_id" ref="hr.view_employee_form" />
     <field name="arch" type="xml">
+      <xpath expr="//header" position="inside">
+        <field name="visa_status" widget="statusbar" />
+        <button type="object" name="action_expired" string="Expired Visa"/>        
+      </xpath>  
       <xpath expr="//group[@name='emergency']" position="inside">
         <field name="has_disability"/>
+      </xpath> 
+      <xpath expr="//div[@class='oe_title mw-75 ps-0 pe-2']" position="inside">
+        <h3>
+          <field name="ref"/>
+        </h3>
       </xpath>   
+       
       <xpath expr="//sheet/notebook" position="inside"> 
           <page string="Salary Information">
             <group>
               <group string="Results">
+                <field name="visa_status"/>        
                 <field name="salary" string="Total"/>
                 <field name="wage"/> 
                 <field name="allowances_sum"/> 
@@ -41,20 +73,30 @@
         </xpath>
       <field name="work_email" position="after">
         <field name="grade_id" />
-        <field name="contract_type_id"/>    
-      </field>      
+      </field>    
     </field>
   </record>
 
-  <record id="tax_type_view_tree" model="ir.ui.view">
-    <field name="name">Tax Type Tree</field>
-    <field name="model">tax.type</field>
-    <field name="arch" type="xml">
-      <tree string="Tax Type Tree">
-        <!-- Main fields -->
-        <field name="name"/>
-      </tree>
+
+  <record id="valid_visa_server_action" model="ir.actions.server">
+    <field name="name">Valid Visa</field>
+    <field name="model_id" ref="model_hr_employee"/>
+    <field name="binding_model_id" ref="model_hr_employee"/>
+    <field name="state">code</field>
+    <field name="code">
+      action = records.action_valid()
     </field>
+  </record>
+
+  <record id="visa_expiration_cron" model="ir.cron">
+    <field name="name">Check Visa Expiration</field>
+    <field name="model_id" ref="model_hr_employee"/>
+    <field name="state">code</field>
+    <field name="code">model.check_visa_expiration()</field>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+    <field name="numbercall">-1</field>
+    <field name="active">True</field>
   </record>
 
 </odoo>
