@@ -90,4 +90,15 @@ class HREmployee(models.Model):
             else:
                 rec.salary = 0
                 
-    
+    def action_expired(self):
+        for rec in self:
+            rec.write(
+                {'visa_status': 'expired'}
+            )
+            
+    def action_valid(self):
+        for rec in self:
+            rec.write(
+                {'visa_status': 'valid'}
+            )
+
