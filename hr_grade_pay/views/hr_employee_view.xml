@@ -33,7 +33,13 @@
       </xpath>  
       <xpath expr="//group[@name='emergency']" position="inside">
         <field name="has_disability"/>
+      </xpath> 
+      <xpath expr="//div[@class='oe_title mw-75 ps-0 pe-2']" position="inside">
+        <h3>
+          <field name="ref"/>
+        </h3>
       </xpath>   
+       
       <xpath expr="//sheet/notebook" position="inside"> 
           <page string="Salary Information">
             <group>
@@ -67,7 +73,7 @@
         </xpath>
       <field name="work_email" position="after">
         <field name="grade_id" />
-      </field>      
+      </field>    
     </field>
   </record>
 

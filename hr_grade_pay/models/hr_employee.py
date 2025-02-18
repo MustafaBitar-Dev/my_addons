@@ -5,6 +5,9 @@ from datetime import timedelta
 class HREmployee(models.Model):
     _inherit = 'hr.employee'
     
+    # For sequence
+    ref = fields.Char(readonly=True, default="New Employee")
+    
     # Relationship with hr_grade model
     grade_id = fields.Many2one('hr.grade')
     
@@ -113,5 +116,13 @@ class HREmployee(models.Model):
                 elif rec.visa_expire - timedelta(30) < fields.date.today():
                     rec.visa_status = 'soon'
                 else:
-                    rec.visa_status = 'valid'    
+                    rec.visa_status = 'valid'
+                    
+    # CRUD Methods 
+    @api.model   
+    def create(self, vals):
+        res = super(HREmployee, self).create(vals)
+        if res.ref == 'New Employee':
+           res.ref = self.env['ir.sequence'].next_by_code('empolyee_seq')
+        return res    
         

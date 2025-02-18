@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="hr_grade_report" model="ir.actions.report">
+    <field name="name">Grade Information</field>
+    <field name="model_id">hr.employee</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="binding_model_id" ref="model_hr_grade"/>
+    <field name="binding_type">report</field>
+    <field name="report_name">hr_grade_pay.hr_grade_report_template</field>
+  </record>
+
+  <template id="hr_grade_report_template">
+    
+  </template>
+</odoo>
