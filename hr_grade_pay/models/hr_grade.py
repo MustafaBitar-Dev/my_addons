@@ -44,10 +44,12 @@ class HrGrade(models.Model):
     # Relationship with tax_type model
     tax_type_ids = fields.Many2many('tax.type')
     
-    # 
+    # Related Fields 
     pay_scale_max_salary = fields.Float(related='pay_scale_id.max_salary' , required=True, tracking=True, digits=(0, 2))
     pay_scale_min_salary = fields.Float(related='pay_scale_id.min_salary', required=True, tracking=True, digits=(0, 2))
     
+    # Lines field
+    line_ids = fields.One2many('hr.employee', 'grade_id')
     
     # Database level constrains
     _sql_constraints = [

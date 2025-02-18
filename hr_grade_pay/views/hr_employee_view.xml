@@ -6,15 +6,42 @@
     <field name="model">hr.employee</field>
     <field name="inherit_id" ref="hr.view_employee_form" />
     <field name="arch" type="xml">
+      <xpath expr="//group[@name='emergency']" position="inside">
+        <field name="has_disability"/>
+      </xpath>   
       <xpath expr="//sheet/notebook" position="inside"> 
           <page string="Salary Information">
             <group>
-              <field name="wage"/>                         
+              <group string="Results">
+                <field name="salary" string="Total"/>
+                <field name="wage"/> 
+                <field name="allowances_sum"/> 
+              </group>
+              <group string="Allowances">
+                <field name="housing_allowance"/>                         
+                <field name="education_allowance"/>
+                <field name="transport_allowance"/>     
+                <field name="medical_allowance"/>                         
+                <field name="children_allowance"/>                         
+              </group>              
+              <group string="Rates">                
+                <field name="day_hours"/> 
+                <field name="female_rate"/> 
+                <field name="disability_rate"/>                          
+              </group>
+              <group string="Others">
+                <field name="is_retirement_eligible"/> 
+                <field name="grade_level"/> 
+                <field name="pay_scale_id"/> 
+                <field name="pay_scale_min_salary"/>  
+                <field name="pay_scale_max_salary"/>                                        
+              </group>
             </group>
           </page>
         </xpath>
       <field name="work_email" position="after">
         <field name="grade_id" />
+        <field name="contract_type_id"/>    
       </field>      
     </field>
   </record>

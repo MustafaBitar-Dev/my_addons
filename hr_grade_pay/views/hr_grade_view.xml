@@ -75,6 +75,9 @@
                 <field name="grade_level" />
               </group>             
             </page>
+            <page string="Employees">
+                <field name="line_ids" />            
+            </page>
           </notebook>
         </sheet>
         <!-- Add Chatter Box -->
